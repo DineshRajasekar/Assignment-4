@@ -1,0 +1,38 @@
+install.packages(c("tidygraph", "intergraph", "ggnetwork", "netrankr", "ggrepel"))
+
+require(tidyverse)
+require(tidygraph)
+require(intergraph)
+require(ggnetwork)
+require(netrankr)
+require(ggrepel)
+
+talk <- tbl_graph(edges = edge1, directed = FALSE)
+talk
+class(talk)
+
+talk_n <- asNetwork(talk)
+talk_n
+
+talk_g <- ggnetwork(talk_n)
+class(talk_g)
+talk_g
+
+devtools::install_github("DougLuke/UserNetR")
+require(UserNetR)
+library(UserNetR)
+library(ggnetwork)
+
+ggnetplot <- function(Net = Bali)
+{
+  Net <- ggnetwork(Net, layout = "kamadakawai")
+  ggplot(Net, aes(x, y, xend = xend, yend = yend)) +
+    geom_edges(col = "blue") +
+    geom_nodes(aes(colour=role),size=4)+
+    geom_nodetext_repel(aes(label = role), col = "black", size = 5) 
+  
+}
+ggnetplot(Bali)
+
+
+    
