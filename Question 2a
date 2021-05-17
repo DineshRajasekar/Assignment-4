@@ -1,0 +1,29 @@
+install.packages("tidyverse")
+install.packages("maps")
+install.packages('WDI')
+install.packages('countrycode')
+install.packages("plot_grid")
+
+library(tidyverse) 
+require(tidyverse)
+ 
+require(WDI)
+require(maps)
+require(countrycode)
+require(plot_grid)
+
+wdi_data <- WDI(indicator = c("NY.GDP.PCAP.PP.KD","EN.ATM.CO2E.PC"), start=2010, end=2010, extra=TRUE)
+wdi_data = as_tibble(wdi_data)
+wdi_data <- wdi_data %>% rename(GDPpercap=NY.GDP.PCAP.PP.KD,Emit_CO2percap=EN.ATM.CO2E.PC)
+
+
+dat_map <- map_data("world")
+head(dat_map) 
+
+ggplot(merged,aes(x=long,
+                  y=lat,
+                  group=group,
+                  year=(2010),
+                  fill=(Emit_CO2percap)))+
+  scale_fill_viridis_c(option = "plasma", trans = "sqrt")+
+  geom_polygon()
