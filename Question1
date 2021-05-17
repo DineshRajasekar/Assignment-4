@@ -1,0 +1,8 @@
+a)
+	merge: is used to merge two data frames either by common columns or row names 
+	joins : are usually used to add columns from y -> x based on the matching rows they have mentioned. 
+	dat_map is where the longitude and latitude are saved in the df |
+	wdi :  is where the country names with their GDP , emissions and other geographic details are stored. 
+	by="ccode" : is the common column in both which does full join , joining both the data frames together with their matching columns 
+
+
